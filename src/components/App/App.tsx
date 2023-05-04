@@ -21,16 +21,13 @@ export const App = () => {
 
   const filter = useSelector(getFilter);
 
-  const shownContacts = storedContacts.filter(item => {
+  const shownContacts = storedContacts.filter((item: IContact) => {
     return item.name.includes(filter);
   });
 
   store.subscribe(() => {
-    console.log(store.getState().contacts);
     localStorage.setItem('contacts', JSON.stringify(store.getState().contacts));
   });
-
-  const storeContactDeletehandler = () => {};
 
   return (
     <Container>
@@ -40,13 +37,7 @@ export const App = () => {
       <Form></Form>
       <ContactsList>
         {shownContacts.map(({ name, number, id }: IContact) => (
-          <Contact
-            name={name}
-            number={number}
-            id={id}
-            key={id}
-            deleteHandler={storeContactDeletehandler}
-          />
+          <Contact name={name} number={number} id={id} key={id} />
         ))}
       </ContactsList>
       <ToastContainer />

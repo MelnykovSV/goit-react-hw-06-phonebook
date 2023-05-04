@@ -12,8 +12,12 @@ export const ContactsList = ({ children }: IContactsListProps) => {
 
   const dispatch = useDispatch();
 
-  const storeSearchHandler = e => {
-    dispatch(setFilter(e.target.value));
+  const storeSearchHandler = (e: React.SyntheticEvent) => {
+    const target = e.target as typeof e.target & {
+      value: string;
+    };
+
+    dispatch(setFilter(target.value));
   };
 
   return (

@@ -1,19 +1,21 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { PayloadAction, createReducer } from '@reduxjs/toolkit';
 
 import { addContact, deleteContact, setFilter } from './actions';
 
+import { IContact } from '../interfaces';
+
 const contactsInitialState = localStorage.getItem('contacts')
-  ? JSON.parse(localStorage.getItem('contacts'))
+  ? JSON.parse(localStorage.getItem('contacts')!)
   : [];
 
 export const contactsReducer = createReducer(contactsInitialState, {
-  [addContact]: (state, action) => {
+  [addContact.type]: (state, action: PayloadAction<string>) => {
     return [action.payload, ...state];
   },
-  [deleteContact]: (state, action) => {
+  [deleteContact.type]: (state, action: PayloadAction<string>) => {
     const contactId = action.payload;
 
-    const newState = state.filter(item => {
+    const newState = state.filter((item: IContact) => {
       return item.id !== contactId;
     });
     return newState;
@@ -21,7 +23,7 @@ export const contactsReducer = createReducer(contactsInitialState, {
 });
 
 export const filterReducer = createReducer('', {
-  [setFilter]: (state, action) => {
+  [setFilter.type]: (state, action: PayloadAction<string>) => {
     return action.payload;
   },
 });
