@@ -7,7 +7,7 @@ import { ModernNormalize } from 'emotion-modern-normalize';
 import { Container } from './App.styled';
 import { IContact } from '../../interfaces';
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useSelector } from 'react-redux';
