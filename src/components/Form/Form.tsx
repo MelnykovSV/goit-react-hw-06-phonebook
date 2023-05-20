@@ -1,17 +1,13 @@
 import React from 'react';
 import { Container } from './Form.styled';
-import {
-  Formik,
-  Form as FormikForm,
-  Field,
-  ErrorMessage,
-  FormikHelpers,
-} from 'formik';
+import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/actions';
 import { store } from '../../redux/store';
+import { IContact } from '../../interfaces';
+import { IFormData } from '../../interfaces';
 
 export const Form = () => {
   const dispatch = useDispatch();
@@ -35,9 +31,9 @@ export const Form = () => {
       .required('This field is required'),
   });
 
-  const addContactToStore = data => {
+  const addContactToStore = (data: IFormData) => {
     if (
-      store.getState().contacts.find(item => {
+      store.getState().contacts.find((item: IContact) => {
         return item.name === data.name.trim();
       })
     ) {

@@ -6,13 +6,18 @@ export interface IContact {
 
 export interface IState {
   contacts: IContact[];
+  filter: string;
+}
+
+export interface IFormData {
+  name: string;
+  number: string;
 }
 
 export interface IContactProps {
   name: string;
   number: string;
   id: string;
-  deleteHandler: (id: string) => void;
 }
 
 export interface IContactsListProps {

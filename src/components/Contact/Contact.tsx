@@ -6,7 +6,7 @@ import { IContactProps } from '../../interfaces';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/actions';
 
-export const Contact = ({ name, number, id, deleteHandler }: IContactProps) => {
+export const Contact = ({ name, number, id }: IContactProps) => {
   const dispatch = useDispatch();
 
   const handleDeleteClick = () => {
