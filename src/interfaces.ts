@@ -33,3 +33,5 @@ export interface IContact {
   number: string;
   id: string;
 }
+
+export interface ContactsState extends Array<IContact> {}

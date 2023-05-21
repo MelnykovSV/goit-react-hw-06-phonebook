@@ -40,6 +40,7 @@ export const Form = () => {
       console.log('this contact already exists!');
       return;
     }
+    console.log(addContact);
     dispatch(addContact(data.name.trim(), data.number));
   };
 

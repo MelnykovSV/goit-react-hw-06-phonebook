@@ -1,18 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+import { IContact, ContactsState } from '../interfaces';
 
 import shortid from 'shortid';
 
-const contactsInitialState = [];
+const contactsInitialState = [] as ContactsState;
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
   reducers: {
     addContact: {
-      reducer(state, action) {
-        return [action.payload, ...state];
+      reducer(state, action: PayloadAction<IContact>) {
+        state.unshift(action.payload);
       },
-      prepare(name, number) {
+      prepare(name: string, number: string) {
         return {
           payload: {
             id: shortid(),
@@ -23,10 +25,10 @@ const contactsSlice = createSlice({
       },
     },
 
-    deleteContact(state, action) {
+    deleteContact(state, action: PayloadAction<string>) {
       const contactId = action.payload;
 
-      const newState = state.filter(item => {
+      const newState = state.filter((item: IContact) => {
         return item.id !== contactId;
       });
       return newState;
