@@ -1,15 +1,12 @@
 import React from 'react';
 import { Container, StyledSearchIcon } from './Contactslist.styled';
-
-import { IContactsListProps } from '../../interfaces';
+import { IContactsListProps, IContact } from '../../interfaces';
 import shortid from 'shortid';
-
-// import { setFilter } from '../../redux/actions';
-
 import { setFilter } from '../../redux/slices/filterSlice';
 import { useDispatch } from 'react-redux';
+import { Contact } from '../Contact/Contact';
 
-export const ContactsList = ({ children }: IContactsListProps) => {
+export const ContactsList = ({ contacts }: IContactsListProps) => {
   const formId = shortid.generate();
 
   const dispatch = useDispatch();
@@ -38,7 +35,11 @@ export const ContactsList = ({ children }: IContactsListProps) => {
         <StyledSearchIcon />
       </div>
 
-      <ul>{children}</ul>
+      <ul>
+        {contacts.map(({ name, number, id }: IContact) => (
+          <Contact name={name} number={number} id={id} key={id} />
+        ))}
+      </ul>
     </Container>
   );
 };

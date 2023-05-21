@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-
 import { IContact, ContactsState } from '../../interfaces';
-
 import shortid from 'shortid';
+import { IState } from '../../interfaces';
+export const getContacts = (state: IState) => state.contacts;
 
 const contactsInitialState = [] as ContactsState;
 
@@ -37,5 +37,4 @@ const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
-
 export const { addContact, deleteContact } = contactsSlice.actions;

@@ -1,4 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IState } from '../../interfaces';
+
+export const getFilter = (state: IState) => state.filter;
 
 const filterSlice = createSlice({
   name: 'filter',
@@ -12,5 +15,4 @@ const filterSlice = createSlice({
 });
 
 export const filterReducer = filterSlice.reducer;
-
 export const { setFilter } = filterSlice.actions;
