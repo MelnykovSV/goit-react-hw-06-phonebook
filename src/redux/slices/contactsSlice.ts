@@ -4,20 +4,6 @@ import { IContact, ContactsState } from '../../interfaces';
 
 import shortid from 'shortid';
 
-import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
-
-// import {
-//   persistStore,
-//   persistReducer,
-//   FLUSH,
-//   REHYDRATE,
-//   PAUSE,
-//   PERSIST,
-//   PURGE,
-//   REGISTER,
-// } from 'redux-persist';
-
 const contactsInitialState = [] as ContactsState;
 
 const contactsSlice = createSlice({
@@ -50,17 +36,6 @@ const contactsSlice = createSlice({
   },
 });
 
-// export const contactsReducer = contactsSlice.reducer;
-
-const persistConfig = {
-  key: 'persist-contacts',
-  storage,
-  // blacklist: ['filter'],
-};
-
-export const persistedReducer = persistReducer(
-  persistConfig,
-  contactsSlice.reducer
-);
+export const contactsReducer = contactsSlice.reducer;
 
 export const { addContact, deleteContact } = contactsSlice.actions;

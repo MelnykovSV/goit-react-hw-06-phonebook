@@ -17,7 +17,7 @@ import { getContacts, getFilter } from '../../redux/selectors';
 // import { store } from '../../redux/store';
 
 export const App = () => {
-  const storedContacts = useSelector(getContacts).contacts;
+  const storedContacts = useSelector(getContacts);
   console.log(storedContacts);
 
   const filter = useSelector(getFilter);
