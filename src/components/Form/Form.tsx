@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { useDispatch } from 'react-redux';
 // import { addContact } from '../../redux/actions';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/slices/contactsSlice';
 import { store } from '../../redux/store';
 import { IContact, IFormData } from '../../interfaces';
 

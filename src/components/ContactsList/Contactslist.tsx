@@ -6,7 +6,7 @@ import shortid from 'shortid';
 
 // import { setFilter } from '../../redux/actions';
 
-import { setFilter } from '../../redux/filterSlice';
+import { setFilter } from '../../redux/slices/filterSlice';
 import { useDispatch } from 'react-redux';
 
 export const ContactsList = ({ children }: IContactsListProps) => {

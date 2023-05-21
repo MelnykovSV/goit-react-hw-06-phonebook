@@ -14,10 +14,11 @@ import { useSelector } from 'react-redux';
 
 import { getContacts, getFilter } from '../../redux/selectors';
 
-import { store } from '../../redux/store';
+// import { store } from '../../redux/store';
 
 export const App = () => {
   const storedContacts = useSelector(getContacts);
+  console.log(storedContacts);
 
   const filter = useSelector(getFilter);
 
@@ -25,9 +26,9 @@ export const App = () => {
     return item.name.includes(filter);
   });
 
-  store.subscribe(() => {
-    localStorage.setItem('contacts', JSON.stringify(store.getState().contacts));
-  });
+  // store.subscribe(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(store.getState().contacts));
+  // });
 
   return (
     <Container>
