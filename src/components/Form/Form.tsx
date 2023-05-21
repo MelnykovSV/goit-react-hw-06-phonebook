@@ -4,10 +4,10 @@ import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/actions';
+// import { addContact } from '../../redux/actions';
+import { addContact } from '../../redux/contactsSlice';
 import { store } from '../../redux/store';
-import { IContact } from '../../interfaces';
-import { IFormData } from '../../interfaces';
+import { IContact, IFormData } from '../../interfaces';
 
 export const Form = () => {
   const dispatch = useDispatch();

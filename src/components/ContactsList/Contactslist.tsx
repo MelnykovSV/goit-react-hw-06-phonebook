@@ -4,7 +4,9 @@ import { Container, StyledSearchIcon } from './Contactslist.styled';
 import { IContactsListProps } from '../../interfaces';
 import shortid from 'shortid';
 
-import { setFilter } from '../../redux/actions';
+// import { setFilter } from '../../redux/actions';
+
+import { setFilter } from '../../redux/filterSlice';
 import { useDispatch } from 'react-redux';
 
 export const ContactsList = ({ children }: IContactsListProps) => {
