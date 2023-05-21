@@ -21,7 +21,7 @@ export interface IContactProps {
 }
 
 export interface IContactsListProps {
-  children: JSX.Element[];
+  contacts: IContactProps[];
 }
 
 export interface IFormProps {
