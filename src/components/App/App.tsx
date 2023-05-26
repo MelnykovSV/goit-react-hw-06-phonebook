@@ -1,30 +1,77 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form } from '../Form/Form';
 import { ContactsList } from '../ContactsList/Contactslist';
+
 import { ModernNormalize } from 'emotion-modern-normalize';
+import { Filter } from '../Filter/Filter';
+
 import { Container } from './App.styled';
 import { IContact } from '../../interfaces';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useSelector } from 'react-redux';
 
-import { getContacts } from '../../redux/slices/contactsSlice';
-import { getFilter } from '../../redux/slices/filterSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
-  const storedContacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  ///Gets initial contacts value from local storage
+  const [contacts, setContacts] = useState(
+    localStorage.getItem('contacts')
+      ? JSON.parse(localStorage.getItem('contacts')!)
+      : []
+  );
+  const [filter, setFilter] = useState('');
 
-  const shownContacts = storedContacts.filter((item: IContact) => {
-    return item.name.includes(filter);
-  });
+  /// Saves contacts to local storage on its change
+
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
+
+  ///Saves contact to contacts if there is no contact with such name
+  const formSubmitHandler = (data: IContact): boolean => {
+    const normalizedName = data.name.toLowerCase();
+    if (
+      !contacts.some(
+        (item: IContact) => item.name.toLowerCase() === normalizedName
+      )
+    ) {
+      setContacts((prevContacts: IContact[]) => [data, ...prevContacts]);
+      return true;
+    } else {
+      toast(`${data.name} is already in contacts.`);
+
+      return false;
+    }
+  };
+
+  ///Deletes contact
+  const contactDeleteHandler = (id: string): void => {
+    setContacts((prevContacts: IContact[]) =>
+      prevContacts.filter((item: IContact): boolean => item.id !== id)
+    );
+  };
+
+  /// Sets contacts filter
+  const contactsFilter = (value: string): void => {
+    setFilter(value.toLowerCase());
+  };
+
+  const filteredContacts = contacts.filter((item: IContact): boolean =>
+    item.name.toLowerCase().includes(filter)
+  );
 
   return (
     <Container>
       <ModernNormalize />
       <h2>Phonebook</h2>
-      <Form />
-      <ContactsList contacts={shownContacts} />
+
+      <Form formSubmit={formSubmitHandler}></Form>
+      <h2>Contacts</h2>
+      <Filter contactsFilter={contactsFilter} />
+      <ContactsList
+        filteredContacts={filteredContacts}
+        contactDeleteHandler={contactDeleteHandler}
+      />
+
       <ToastContainer />
     </Container>
   );

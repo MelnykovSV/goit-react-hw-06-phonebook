@@ -1,40 +1,34 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IContact, ContactsState } from '../../interfaces';
+import { createSlice } from '@reduxjs/toolkit';
 import shortid from 'shortid';
-import { IState } from '../../interfaces';
-export const getContacts = (state: IState) => state.contacts;
-
-const contactsInitialState = [] as ContactsState;
+import { IContact } from '../../interfaces';
+import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: contactsInitialState,
+  initialState: [] as IContact[],
   reducers: {
     addContact: {
-      reducer(state, action: PayloadAction<IContact>) {
+      reducer: (state, action: PayloadAction<IContact>) => {
         state.unshift(action.payload);
       },
-      prepare(name: string, number: string) {
+      prepare: (name: string, phone: string) => {
         return {
           payload: {
             id: shortid(),
             name: name,
-            number: number,
+            phone: phone,
           },
         };
       },
     },
-
     deleteContact(state, action: PayloadAction<string>) {
       const contactId = action.payload;
-
-      const newState = state.filter((item: IContact) => {
-        return item.id !== contactId;
-      });
+      const newState = state.filter(item => item.id !== contactId);
       return newState;
     },
   },
 });
 
-export const contactsReducer = contactsSlice.reducer;
 export const { addContact, deleteContact } = contactsSlice.actions;
+
+export const contactsReducer = contactsSlice.reducer;

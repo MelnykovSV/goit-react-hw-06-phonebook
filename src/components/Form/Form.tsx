@@ -2,13 +2,10 @@ import React from 'react';
 import { Container } from './Form.styled';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/slices/contactsSlice';
-import { store } from '../../redux/store';
-import { IContact, IFormData } from '../../interfaces';
+import { IFormProps } from '../../interfaces';
+import shortid from 'shortid';
 
-export const Form = () => {
-  const dispatch = useDispatch();
+export const Form = ({ formSubmit }: IFormProps) => {
   const schema = yup.object().shape({
     name: yup
       .string()
@@ -29,24 +26,31 @@ export const Form = () => {
       .required('This field is required'),
   });
 
-  const addContactToStore = (data: IFormData) => {
-    if (
-      store.getState().contacts.find((item: IContact) => {
-        return item.name === data.name.trim();
-      })
-    ) {
-      console.log('this contact already exists!');
-      return;
+  async function submitHandler(
+    values: {
+      name: string;
+      number: string;
+    },
+    { resetForm }: { resetForm: () => void }
+  ): Promise<void> {
+    const isValid = await schema.isValid(values);
+
+    if (isValid) {
+      const result = { ...values, id: shortid.generate() };
+
+      const isSuccessfull = formSubmit(result);
+
+      if (isSuccessfull) {
+        resetForm();
+      }
     }
-    console.log(addContact);
-    dispatch(addContact(data.name.trim(), data.number));
-  };
+  }
 
   return (
     <Container>
       <Formik
         initialValues={{ name: '', number: '' }}
-        onSubmit={addContactToStore}
+        onSubmit={submitHandler}
         validationSchema={schema}
       >
         <FormikForm>
