@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Form } from '../Form/Form';
 import { ContactsList } from '../ContactsList/Contactslist';
 
@@ -21,16 +20,9 @@ import {
 import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
-  ///Gets initial contacts value from local storage
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
   const contacts = useSelector(getContacts);
-
-  /// Saves contacts to local storage on its change
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
 
   ///Saves contact to contacts if there is no contact with such name
   const formSubmitHandler = (data: IContact): boolean => {
