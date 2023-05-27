@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container } from './Contactslist.styled';
 import { IContactsListProps } from '../../interfaces';
 import { Contact } from '../Contact/Contact';

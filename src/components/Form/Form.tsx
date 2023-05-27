@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container } from './Form.styled';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';

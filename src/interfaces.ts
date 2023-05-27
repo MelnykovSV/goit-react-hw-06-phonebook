@@ -28,9 +28,3 @@ export interface IContact {
 export interface IFilterProps {
   contactsFilter: (value: string) => void;
 }
-
-export interface IAddContactAction {}
-
-// export interface IStore {
-
-// }

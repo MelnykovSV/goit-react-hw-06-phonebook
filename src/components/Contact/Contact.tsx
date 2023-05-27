@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container } from './Contact.styled';
 import { BsTrash3 } from 'react-icons/bs';
 import { IContactProps } from '../../interfaces';
