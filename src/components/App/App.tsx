@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Form } from '../Form/Form';
 import { ContactsList } from '../ContactsList/Contactslist';
 
@@ -13,18 +13,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { updateFilter, getFilter } from '../../redux/slices/filterSlice';
+import {
+  addContact,
+  deleteContact,
+  getContacts,
+} from '../../redux/slices/contactsSlice';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
   ///Gets initial contacts value from local storage
-  const [contacts, setContacts] = useState(
-    localStorage.getItem('contacts')
-      ? JSON.parse(localStorage.getItem('contacts')!)
-      : []
-  );
+  // const [contacts, setContacts] = useState(
+  //   localStorage.getItem('contacts')
+  //     ? JSON.parse(localStorage.getItem('contacts')!)
+  //     : []
+  // );
   // const [filter, setFilter] = useState('');
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
+  const contacts = useSelector(getContacts);
 
   console.log(filter);
 
@@ -42,7 +48,8 @@ export const App = () => {
         (item: IContact) => item.name.toLowerCase() === normalizedName
       )
     ) {
-      setContacts((prevContacts: IContact[]) => [data, ...prevContacts]);
+      // setContacts((prevContacts: IContact[]) => [data, ...prevContacts]);
+      dispatch(addContact(data.name, data.phone));
       return true;
     } else {
       toast(`${data.name} is already in contacts.`);
@@ -53,9 +60,11 @@ export const App = () => {
 
   ///Deletes contact
   const contactDeleteHandler = (id: string): void => {
-    setContacts((prevContacts: IContact[]) =>
-      prevContacts.filter((item: IContact): boolean => item.id !== id)
-    );
+    // setContacts((prevContacts: IContact[]) =>
+    //   prevContacts.filter((item: IContact): boolean => item.id !== id)
+    // );
+
+    dispatch(deleteContact(id));
   };
 
   /// Sets contacts filter

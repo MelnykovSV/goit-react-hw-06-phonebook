@@ -13,7 +13,7 @@ export const ContactsList = ({
         {filteredContacts.map(item => (
           <Contact
             name={item.name}
-            number={item.number}
+            number={item.phone}
             id={item.id}
             key={item.id}
             deleteHandler={contactDeleteHandler}

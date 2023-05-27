@@ -13,6 +13,8 @@ const contactsSlice = createSlice({
         state.unshift(action.payload);
       },
       prepare: (name: string, phone: string) => {
+        console.log(name);
+        console.log(phone);
         return {
           payload: {
             id: shortid(),
