@@ -9,6 +9,10 @@ import { Container } from './App.styled';
 import { IContact } from '../../interfaces';
 
 import { ToastContainer, toast } from 'react-toastify';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import { updateFilter, getFilter } from '../../redux/slices/filterSlice';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
@@ -18,7 +22,11 @@ export const App = () => {
       ? JSON.parse(localStorage.getItem('contacts')!)
       : []
   );
-  const [filter, setFilter] = useState('');
+  // const [filter, setFilter] = useState('');
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilter);
+
+  console.log(filter);
 
   /// Saves contacts to local storage on its change
 
@@ -52,7 +60,9 @@ export const App = () => {
 
   /// Sets contacts filter
   const contactsFilter = (value: string): void => {
-    setFilter(value.toLowerCase());
+    // setFilter(value.toLowerCase());
+
+    dispatch(updateFilter(value.toLowerCase()));
   };
 
   const filteredContacts = contacts.filter((item: IContact): boolean =>

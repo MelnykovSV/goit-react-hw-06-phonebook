@@ -1,15 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit/dist/createSlice';
+import { createSlice } from '@reduxjs/toolkit';
+import { IState } from '../../interfaces';
 
 const filterSlice = createSlice({
   name: 'filter',
   initialState: '',
   reducers: {
-    setFilter: (state, action) => {
+    updateFilter: (_, action) => {
       return action.payload;
     },
   },
 });
 
-export const { setFilter } = filterSlice.actions;
+export const { updateFilter } = filterSlice.actions;
 
 export const filterReducer = filterSlice.reducer;
+
+export const getFilter = (state: IState) => state.filter;

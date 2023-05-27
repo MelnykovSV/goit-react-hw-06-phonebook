@@ -1,5 +1,6 @@
 export interface IState {
   contacts: IContact[];
+  filter: string;
 }
 
 export interface IContactProps {
@@ -29,3 +30,7 @@ export interface IFilterProps {
 }
 
 export interface IAddContactAction {}
+
+// export interface IStore {
+
+// }
