@@ -22,17 +22,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
   ///Gets initial contacts value from local storage
-  // const [contacts, setContacts] = useState(
-  //   localStorage.getItem('contacts')
-  //     ? JSON.parse(localStorage.getItem('contacts')!)
-  //     : []
-  // );
-  // const [filter, setFilter] = useState('');
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
   const contacts = useSelector(getContacts);
-
-  console.log(filter);
 
   /// Saves contacts to local storage on its change
 
@@ -48,7 +40,6 @@ export const App = () => {
         (item: IContact) => item.name.toLowerCase() === normalizedName
       )
     ) {
-      // setContacts((prevContacts: IContact[]) => [data, ...prevContacts]);
       dispatch(addContact(data.name, data.phone));
       return true;
     } else {
@@ -60,17 +51,11 @@ export const App = () => {
 
   ///Deletes contact
   const contactDeleteHandler = (id: string): void => {
-    // setContacts((prevContacts: IContact[]) =>
-    //   prevContacts.filter((item: IContact): boolean => item.id !== id)
-    // );
-
     dispatch(deleteContact(id));
   };
 
   /// Sets contacts filter
   const contactsFilter = (value: string): void => {
-    // setFilter(value.toLowerCase());
-
     dispatch(updateFilter(value.toLowerCase()));
   };
 
