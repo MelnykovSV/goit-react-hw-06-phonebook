@@ -1,27 +1,18 @@
-export interface IContact {
-  name: string;
-  number: string;
-  id: string;
-}
-
 export interface IState {
   contacts: IContact[];
   filter: string;
-}
-
-export interface IFormData {
-  name: string;
-  number: string;
 }
 
 export interface IContactProps {
   name: string;
   number: string;
   id: string;
+  deleteHandler: (id: string) => void;
 }
 
 export interface IContactsListProps {
-  contacts: IContactProps[];
+  filteredContacts: IContact[];
+  contactDeleteHandler: (id: string) => void;
 }
 
 export interface IFormProps {
@@ -30,8 +21,16 @@ export interface IFormProps {
 
 export interface IContact {
   name: string;
-  number: string;
+  phone: string;
   id: string;
 }
 
-export interface ContactsState extends Array<IContact> {}
+export interface IFilterProps {
+  contactsFilter: (value: string) => void;
+}
+
+export interface IAddContactAction {}
+
+// export interface IStore {
+
+// }

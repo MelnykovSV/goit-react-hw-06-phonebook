@@ -3,25 +3,8 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { colors } from '../../constants';
 
 export const Container = styled.div`
-  width: 100%;
-  input {
-    width: 100%;
-  }
   div {
     position: relative;
-  }
-  h2 {
-    margin-bottom: 10px;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-    font-size: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-height: 334px;
-    overflow-y: auto;
   }
   label {
     display: block;
