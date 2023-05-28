@@ -6,19 +6,18 @@ import { IContact } from '../../interfaces';
 import { ModernNormalize } from 'emotion-modern-normalize';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import { useSelector, useDispatch } from 'react-redux';
 import { updateFilter, getFilter } from '../../redux/slices/filterSlice';
 import {
   addContact,
   deleteContact,
   getContacts,
 } from '../../redux/slices/contactsSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
-  const contacts = useSelector(getContacts);
+  const dispatch = useAppDispatch();
+  const filter = useAppSelector(getFilter);
+  const contacts = useAppSelector(getContacts);
 
   ///Saves contact to contacts if there is no contact with such name
   const formSubmitHandler = (data: IContact): boolean => {
